@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+    <title>Energy</title>
+    <script type="text/javascript" src="http://iop.io/js/iopctrl.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="Script/download/gauge.min.js"></script>
+    <script src="Script/download/Chart.js"></script>
+    <link href="style/speedometer.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body
+    style="width: 100%; height: 100%; min-height: 1440px; overflow-y: hidden; padding-top: 50px; background-image: url('background/bg_ammongas_dashboard.jpg'); overflow-x: hidden; background-repeat: no-repeat; background-size: 100% 100%;">
+    <div style="width: 1920px; height: 100%; margin: auto; position: relative;">
+        <div class="bodyheader" style="width: 100%;">
+            <h1 style="width: 100%; text-align: center; position: relative; color: 	#008000; font-size: 50px;">
+                <strong>Energy
+                    production</strong></h1>
+        </div>
+        <div id="row1" style="width: 100%; height: 70px; padding-top: 50px;">
+            <div id="energyProductionRow" style="display: inline; padding-top: 5px;">
+                <h1 id="energyProdTextrow" style="display: inline; padding-left: 50px; padding-top: 10px; vertical-align: middle; ">Energy
+                    production in 8 Ammongas
+                    upgrading plants:</h1>
+                <h1 id="kwEnergyText" style="display: inline; float: right; padding-right: 70px; ">
+                    %loading%
+                    kw/h
+                </h1>
+            </div>
+        </div>
+        <br>
+        <div id="row2" style="width: 100%; height: 100px;">
+            <div id="energyCO2Row" style="width: 100%; height: 100px; display: inline;">
+                <h1 id="amountProdTextRow" style="display: inline; padding-top: 0px; padding-left: 50px;">Amount of saved CO2 in 8 plants:
+                </h1>
+                <h1 id="kgco2Text" style="display: inline-block; float: right; padding-right: 70px;">%loading%
+                    kg
+                </h1>
+            </div>
+        </div>
+        <div id="row3" style="width: 100%; height: 100px;">
+            <div id="corespondingRow" style="width: 100%; height: 100px; display: inline;">
+                <h1 style="display: inline; padding-top: 2%; padding-left: 50px;">This coresponds to in Boeing 737
+                    flying
+                    hours:</h1>
+                <h1 id="corespondingText" style="display: inline; float: right; padding-right: 70px;">5458
+                    Airplane Flights
+                </h1>
+            </div>
+        </div>
+
+
+        <div style=" border-bottom: 2px solid black; float: left; vertical-align: text-top; height: auto; background-color: aqua; width: 100%"
+            id="textRow">
+        </div>
+        <div id="row13"
+            style="position: relative;  display: inherit; width: 100%; height: 250px;  align-self: flex-end; vertical-align: middle;">
+            <div id="RowText1" style="display: inline; background-color: white; vertical-align: middle;">
+                <h1 id="gasproductionplants"
+                    style="float: left; text-align: center; vertical-align: middle; text-align: center; padding-top: 80px; padding-left: 50px;">
+                    Total
+                    Current
+                    gas production for x plants
+                </h1>
+            </div>
+            <div
+                style=" display: inline-flex; padding-left: 350px; position: realative; vertical-align: middle; align-content: flex-end;">
+                <canvas style="height: 350px;  width: 350; padding-top: 10px;" id="totalGauge"></canvas>
+            </div>
+            <div id="value"
+                style="display: inline; padding-left: 100px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+                <h2 id="totalCurrProd"
+                    style="align-content: flex-end; position: absolute; padding-left: 10px; padding-top: 60px;">
+                    <p>%loading% &sup3;/h</p>
+                </h2>
+            </div>
+            <div id="Today" style="width: auto; display: inline;"></div>
+            <h1 id="totalTotalProd"
+                style="text-align: end; padding-right: 70px; float: right; vertical-align: middle; padding-top: 100px;">
+                %loading%
+                m&sup3;
+            </h1>
+        </div>
+        <div style=" border-bottom: 2px solid black; float: left; vertical-align: text-top; height: auto; background-color: aqua; width: 100%"
+            id="textRow">
+        </div>
+        <div id="row13"
+            style="position: relative;  display: inherit; width: 100%; height: 100%;  align-self: flex-end; vertical-align: middle;">
+            <div id="RowText1" style="display: inline; background-color: white; vertical-align: middle;">
+                <h1 id="oeeheader"
+                    style="float: left; text-align: center; vertical-align: middle; text-align: center; padding-top: 100px; padding-left: 50px;">
+                    OEE for x plants:
+                </h1>
+            </div>
+            <div
+                style=" display: inline-flex; padding-left: 700px; position: realative; vertical-align: middle; align-content: flex-end;">
+                <canvas id="barCharttotal" height="250px" width="250px">
+                    <script src="Script/Pie/total.js"></script>
+                </canvas>
+            </div>
+            <div id="value"
+                style="display: inline; float: right; padding-right: 150px; position: relative; vertical-align: middle; padding-top: 2%;">
+                <h1 id="totalPieText"
+                    style="align-content: flex-end; position: absolute; float: right; padding-top: 100px; width: fit-content;">
+                    %loading%
+                </h1>
+            </div>
+        </div>
+
+        <div style=" border-bottom: 4px solid black; float: left; vertical-align: text-top; height: auto; padding-top: 10px; width: 100%"
+            id="textRow">
+        </div>
+    </div>
+</body>
+
+<script src="Script/Gauge/totalGauge.js"></script>
+<script src="Script/ApiScript/energy/TotalCalculator.js"></script>
+
+<script>
+
+
+    //Auto scroll down (looks bad tho)
+    /*
+    setInterval(() => {
+        window.scrollBy(0, 2);
+    }, 50);
+    */
+
+    //Automaticly changes to next html page
+    setTimeout(function () { window.location = 'production.html'; }, 20000);
+
+</script>
+
+</html>

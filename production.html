@@ -1,0 +1,776 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="">
+	<link rel="stylesheet" href="style/style.css" type="text/css">
+	<title>Production</title>
+	<script type="text/javascript" src="http://iop.io/js/iopctrl.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="Script/download/gauge.min.js"></script>
+	<script src="Script/config.js"></script>
+	<script src="Script/ApiScript/facilities.js"></script>
+	<link href="style/speedometer.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body
+	style="background-image: url('background/background1.png'); background-repeat: no-repeat; background-size: 100% 100%; ">
+	<img src="background/header.png" alt="Ammongas" width="100%" height="200px"
+		style="position: fixed; opacity: 95%; border-bottom: 2px solid black; z-index: 3;padding-top: -15px; margin-top: -15px; margin-left: -10px;">
+	<div id="headeritem"
+		style="width: 1920px; right: 0; left: 0; position: fixed; z-index: 3; margin-right: auto; margin-left: auto; ">
+		<img src="background/Logo_black.png" alt="Ammongas" width="250px" height="80px"
+			style="padding-left: 100px; padding-top: 20px; position: fixed;">
+		<img src="background/AL_logo_RGB_bw.png" alt="Ammongas" width="290px" height="60px"
+			style="padding-left: 1500px; padding-top: 30px; position: fixed;">
+
+		<div class="header"
+			style="width: 1920px; align-content: center; align-items: center; position: fixed;  z-index: 3;">
+			<h1 style="width: auto; text-align: center; padding-top: 40px; color: 	#008000 "><strong>Rawgas
+					production</strong></h1>
+		</div>
+		<div id="headertext" style="width: 1920px; height: 50px;position: fixed; z-index: 3; padding-top: 120px;">
+			<h1 style="display: inline-block; width: 100px; padding-left: 860px; position: absolute;">
+				<strong>Current</strong></h1>
+			<h1 style="display: inline-block; width: fit-content; padding-left: 1100px; position: absolute;">
+				<strong>Since midnight</strong>
+			</h1>
+			<h1 style="display: inline-block; width: fit-content; padding-left: 1450px; position: absolute;">
+				<strong>Yesterday</strong></h1>
+			<h1 style="display: inline-block; width: fit-content; padding-left: 1700px; position: absolute;">
+				<strong>Overall total</strong>
+			</h1>
+		</div>
+	</div>
+	<div style="width: 1920px; height: 100%; margin: auto; position: relative;">
+		<div id="row1"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;align-self: flex-end; padding-top: 250px; z-index: 2;">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1005 Stormossen</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 340px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="stormosenGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="stormosenCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="stormosenTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="stormosenYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="stormosenTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row2"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1006 Avedøre</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 400px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="avedoreGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="avedoreCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="avedoreTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="avedoreYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="avedoreTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row3"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1007 Ribe</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 455px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="ribeGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="ribeCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="ribeTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="ribeYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="ribeTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+
+		<div id="row4"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1009 Månsson</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 385px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="monsonGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="monsonCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="monsonTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="monsonYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="monsonTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row5"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1010 Vrå
+				</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 475px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="vraaGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="vraaCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="vraaTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="vraaYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="vraaTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+
+		<div id="row6"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1011 Outrup</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 420px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="outrupGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="outrupCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="outrupTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="outrupYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="outrupTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+
+		<div id="row7"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1013 Storde</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 420px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="stordeGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="stordeCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="stordeTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="stordeYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="stordeTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row8"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1014 Ølgod</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 420px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="olgodGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="olgodCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="olgodTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="olgodYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="olgodTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row9"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1015 Vinkel</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 420px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="vinkelGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="vinkelCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="vinkelTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="vinkelYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="vinkelTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">N/A
+			</h1>
+		</div>
+
+		<div id="row10"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1016 Glansager</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 360px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="glansagerGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="glansagerCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="glansagerTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="glansagerYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="glansagerTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+
+		<div id="row11"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1017 Sode</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 440px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="sodeGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="sodeCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="sodeTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="sodeYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="sodeTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row12"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px; align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1018 Midtfyn</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 410px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="midtfynGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="midtfynCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="midtfynTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="midtfynYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="midtfynTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row13"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1019 Månsson</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left:  390px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="monson2Gauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="monson2CurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="monson2TodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="monson2YesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="monson2TotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+
+		<div id="row14"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1020 Nordfyn</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 400px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="nordfynGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="nordfynCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="nordfynTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="nordfynYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="nordfynTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row15"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1021 Rødekro</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 400px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="rodekroGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="rodekroCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="rodekroTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="rodekroYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="rodekroTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row16"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px;  align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1022 OL</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 485px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="olGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="olCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="olTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="olYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="olTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row17"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px; align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1023 Blåbjerg</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 410px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="blabjergGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="blabjergCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="blabjergTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="blabjergYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="blabjergTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row18"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px; align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">1025 Vesthimmerland</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 290px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="vesthimmerlandGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="vesthimmerlandCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="vesthimmerlandTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="vesthimmerlandYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="vesthimmerlandTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+		<div id="row19"
+			style="position: relative; border-bottom: 2px solid black; display: inherit; width: 1920px; height: 220px; align-self: flex-end; ">
+			<div id="RowText1" style="display: inline; background-color: white;">
+				<h1 style="float: left; text-align: center; vertical-align: middle;">9010 Hashøj</h1>
+			</div>
+			<div
+				style=" display: inline-flex; padding-left: 430px; position: absolute; vertical-align: middle; align-content: flex-end;">
+				<canvas id="hashojGauge"></canvas>
+			</div>
+			<div id="value"
+				style="padding-left: 900px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="hashojCurrProd" style="align-content: flex-end; position: absolute;">
+					<p>n/a</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1170px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="hashojTodayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="value"
+				style="padding-left: 1490px; float: left; position: absolute; vertical-align: middle; padding-top: 2%;">
+				<h2 id="hashojYesterdayProd" style="align-content: flex-end; position: absolute;">
+					<p>N/A</p>
+				</h2>
+			</div>
+			<div id="Today" style="width: auto;"></div>
+			<h1 id="hashojTotalProd"
+				style="text-align: end; padding-right: 45px; float: right; vertical-align: middle; padding-top: 3%;">n/a
+			</h1>
+		</div>
+
+	</div>
+
+	<!-- Loading all Gauges-->
+	<script src="Script/Gauge/stormosenGauge.js"></script>
+	<script src="Script/Gauge/avedoreGauge.js"></script>
+	<script src="Script/Gauge/blabjergGauge.js"></script>
+	<script src="Script/Gauge/midtfynGauge.js"></script>
+	<script src="Script/Gauge/monsson2Gauge.js"></script>
+	<script src="Script/Gauge/monssonGauge.js"></script>
+	<script src="Script/Gauge/nordfynGauge.js"></script>
+	<script src="Script/Gauge/olgodGauge.js"></script>
+	<script src="Script/Gauge/outrupGauge.js"></script>
+	<script src="Script/Gauge/ribeGauge.js"></script>
+	<script src="Script/Gauge/rodekroGauge.js"></script>
+	<script src="Script/Gauge/vinkelGauge.js"></script>
+	<script src="Script/Gauge/vraaGauge.js"></script>
+	<script src="Script/Gauge/vesthimmerlandGauge.js"></script>
+	<script src="Script/Gauge/olGauge.js"></script>
+	<script src="Script/Gauge/sodeGauge.js"></script>
+	<script src="Script/Gauge/stordeGauge.js"></script>
+	<script src="Script/Gauge/glansagerGauge.js"></script>
+	<script src="Script/Gauge/hashojGauge.js"></script>
+
+	<!-- Request information for all gauges  -->
+	<script src="Script/ApiScript/Gauges/abstractGasRequest.js"></script>
+
+
+	<!-- Pie Requests -->
+	<script src="Script/ApiScript/storage/updateOperation.js"></script>
+
+	<!-- place local storage data into gauges -->
+	<script src="Script/ApiScript/Gauges/TotalCalculator.js"></script>
+	<!-- Calculate Total Storage from gauge data-->
+	<script src="Script/ApiScript/Gauges/apiRequester.js"></script>
+
+	<script>
+
+
+		//Auto scroll down
+		
+		setTimeout(() => {
+			var fps = 100;
+			var speedFactor = 0.001;
+			var minDelta = 0.5;
+			var autoScrollSpeed = 10;
+			var autoScrollTimer, restartTimer;
+			var isScrolling = false;
+			var prevPos = 0, currentPos = 0;
+			var currentTime, prevTime, timeDiff;
+
+			window.addEventListener("scroll", function (e) {
+				// window.pageYOffset is the fallback value for IE
+				currentPos = window.scrollY || window.pageYOffset;
+			});
+
+			window.addEventListener("wheel", handleManualScroll);
+			window.addEventListener("touchmove", handleManualScroll);
+
+			function handleManualScroll() {
+				// window.pageYOffset is the fallback value for IE
+				currentPos = window.scrollY || window.pageYOffset;
+				clearInterval(autoScrollTimer);
+				if (restartTimer) {
+					clearTimeout(restartTimer);
+				}
+				restartTimer = setTimeout(() => {
+					prevTime = null;
+					setAutoScroll();
+				}, 50);
+			}
+
+			function setAutoScroll(newValue) {
+				if (newValue) {
+					autoScrollSpeed = speedFactor * newValue;
+				}
+				if (autoScrollTimer) {
+					clearInterval(autoScrollTimer);
+				}
+				autoScrollTimer = setInterval(function () {
+					currentTime = Date.now();
+					if (prevTime) {
+						if (!isScrolling) {
+							timeDiff = currentTime - prevTime;
+							currentPos += autoScrollSpeed * timeDiff;
+							if (Math.abs(currentPos - prevPos) >= minDelta) {
+								isScrolling = true;
+								window.scrollTo(0, currentPos);
+								isScrolling = false;
+								prevPos = currentPos;
+								prevTime = currentTime;
+							}
+						}
+					} else {
+						prevTime = currentTime;
+					}
+				}, 1000 / fps);
+			}
+
+			setAutoScroll(20);
+		}, 5000);
+
+
+
+		//Automaticly changes to next html page
+
+		setTimeout(function () { window.location = 'operation.html'; }, 100000);
+
+	</script>
+</body>
+
+</html>

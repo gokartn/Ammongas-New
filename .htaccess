@@ -1,0 +1,4 @@
+AuthUserFile /var/www/www.dashboard.automationlab.dk/.htpasswd
+AuthType Basic
+AuthName "Dashboard"
+Require valid-user

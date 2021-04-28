@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML Meta Tag</title>
+    
+</head>
+
+    <script>
+        function change() {
+            localStorage.clear()
+
+            setTimeout(function () { window.location = 'production.html'; }, 5000);
+        }
+    </script>
+
+<body style="background-color: cyan; width: 100%; align-self: center;">
+    <h1 style="text-align: center; padding-top: 100px;">Denne knap tvinger Dashboardet til at opdatere sine data.</h1>
+   <button onclick="change()" id="delete" style="width: 120px; height: 30px; margin-left: 48%; margin-top: 50px; background-color:burlywood;">Click here</button>
+   <h3 style="text-align: center;">N&aring;r du trykker knappen vil du blive sendt tilbage til Dashboardet</h3>
+</body>
+
+</html>

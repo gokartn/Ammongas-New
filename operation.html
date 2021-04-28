@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+    <title>Operation Time</title>
+    <script type="text/javascript" src="http://iop.io/js/iopctrl.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="Script/download/gauge.min.js"></script>
+    <script src="Script/download/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.6.2/math.min.js"></script>
+    <link href="style/speedometer.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body
+    style="width: 100%; height: 100%; min-height: 1440px; background-image: url('background/bg_ammongas_dashboard.jpg'); overflow-x: hidden; overflow-y: hidden; background-repeat: no-repeat; background-size: 100% 100%;  ">
+    <div style="width: 1920px; height: 100%; margin: auto; position: relative;">
+        <div class="bodyheader" style="width: 100%;">
+            <h1
+                style="width: 100%; text-align: center; vertical-align: text-top; position: relative; padding-top: 40px;  color:#008000; font-size: 50px;">
+                <strong>Operation time</strong></h1>
+        </div>
+        <div style="height: fit-content;  width: 100%; position: absolute;" id="textRow">
+            <h1 style="padding-left: 130px ;display: inline-block; position: relative;">1005 Stormossen</h1>
+            <h1 style="padding-left: 100px; display: inline-block; position: relative;">1006 Avedøre</h1>
+            <h1 style="padding-left: 150px; display: inline-block; position: relative;">1007 Ribe</h1>
+            <h1 style="padding-left: 170px; display: inline-block; position: relative;">1009 Månsson</h1>
+            <h1 style="padding-left: 150px; display: inline-block; position: relative;">1010 Vrå</h1>
+        </div>
+        <div id="row1" style="width: 100%; height: 200px; padding-top: 15px;">
+
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 130px;"
+                id="stormosenPie">
+                <canvas id="barChartstormosen" height="220px" width="240px">
+                    <script src="Script/Pie/stormosen.js"></script>
+                </canvas>
+            </div>
+
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 100px;"
+                id="avedorePie">
+                <canvas id="barChartAvedore" height="220px" width="240px">
+                    <script src="Script/Pie/avedore.js"></script>
+                </canvas>
+            </div>
+
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 100px;"
+                id="ribePie">
+                <canvas id="barChartribe" height="220px" width="240px">
+                    <script src="Script/Pie/ribe.js"></script>
+                </canvas>
+            </div>
+
+
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 110px;"
+                id="monssonPie">
+                <canvas id="barChartmonsson" height="220px" width="240px">
+                    <script src="Script/Pie/monsson1.js"></script>
+                </canvas>
+            </div>
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 100px;"
+                id="vraPie">
+                <canvas id="barChartvra" height="220px" width="240px">
+                    <script src="Script/Pie/vra.js"></script>
+                </canvas>
+            </div>
+        </div>
+        <div style="border-bottom: 2px solid black; float: left; vertical-align: text-top; height: fit-content; width: 100%"
+            id="textRow">
+            <h1 id="stormosenPieText" style="vertical-align: top; padding-left: 220px ;display: inline-block;">n/a</h1>
+            <h1 id="avedorePieText" style="Padding-left: 260px; display: inline-block;">n/a</h1>
+            <h1 id="ribePieText" style="padding-left: 260px; display: inline-block;">n/a</h1>
+            <h1 id="monssonPieText" style="padding-left: 270px; display: inline-block;">n/a</h1>
+            <h1 id="vraaPieText" style="height: auto; padding-left: 270px; display: inline-block;">n/a</h1>
+        </div>
+
+        <div style="height: 50px;  width: 100%; position: absolute; padding-top: 85px;" id="textRow">
+            <h1 style="padding-left: 150px ;display: inline-block; position: relative;">1011 Outrup</h1>
+            <h1 style="padding-left: 150px; display: inline-block; position: relative;">1013 Storde</h1>
+            <h1 style="padding-left: 160px; display: inline-block; position: relative;">1014 Ølgod</h1>
+            <h1 style="padding-left: 170px; display: inline-block; position: relative;">1015 Vinkel</h1>
+            <h1 style="padding-left: 150px; display: inline-block; position: relative;">1016 Glansager</h1>
+        </div>
+        <div id="row2" style="width: 100%; height: 230px; ">
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 130px;"
+                id="outrupPie">
+                <canvas id="barChartoutrup" height="220px" width="240px">
+                    <script src="Script/Pie/outrup.js"></script>
+                </canvas>
+            </div>
+
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 100px;"
+                id="stordePie">
+                <canvas id="barChartStorde" height="220px" width="240px">
+                    <script src="Script/Pie/storde.js"></script>
+                </canvas>
+            </div>
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 100px;"
+                id="olgodPie">
+                <canvas id="barChartolgod" height="220px" width="240px">
+                    <script src="Script/Pie/olgod.js"></script>
+                </canvas>
+            </div>
+
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 110px;"
+                id="vinkelPie">
+                <canvas id="barChartvinkel" height="220px" width="240px">
+                    <script src="Script/Pie/vinkel.js"></script>
+                </canvas>
+            </div>
+
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 100px;"
+                id="glansagerPie">
+                <canvas id="barChartglansager" height="220px" width="240px">
+                    <script src="Script/Pie/glansager.js"></script>
+                </canvas>
+            </div>
+        </div>
+
+        <div style="border-bottom: 2px solid black; float: left; vertical-align: text-top; height: fit-content; padding-top: 0px; width: 100%"
+            id="textRow">
+            <h1 id="outrupPieText" style="vertical-align: top; padding-left: 220px ;display: inline-block;">n/a</h1>
+            <h1 id="stordePieText" style="Padding-left: 260px; display: inline-block;">n/a</h1>
+            <h1 id="olgodPieText" style="padding-left: 270px; display: inline-block;">n/a</h1>
+            <h1 id="vinkelPieText" style="padding-left: 270px; display: inline-block;">n/a</h1>
+            <h1 id="glansagerPieText" style="height: auto; padding-left: 270px; display: inline-block;">n/a</h1>
+        </div>
+
+
+        <div style="height: 50px;  width: 100%; position: absolute; padding-top: 155px;" id="textRow">
+            <h1 style="padding-left: 150px ;display: inline-block; position: relative;">1017 Sode</h1>
+            <h1 style="padding-left: 170px; display: inline-block; position: relative;">1018 Midtfyn</h1>
+            <h1 style="padding-left: 140px; display: inline-block; position: relative;">1019 Månsson</h1>
+            <h1 style="padding-left: 130px; display: inline-block; position: relative;">1020 Nordfyn</h1>
+            <h1 style="padding-left: 130px; display: inline-block; position: relative;">1021 Rødekro</h1>
+        </div>
+        <div id="row3" style="width: 100%; height: 230px; ">
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 130px;"
+                id="sodePie">
+                <canvas id="barChartSode" height="220px" width="240px">
+                    <script src="Script/Pie/sode.js"></script>
+                </canvas>
+            </div>
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 100px;"
+                id="midtfynPie">
+                <canvas id="barChartMidtfyn" height="220px" width="240px">
+                    <script src="Script/Pie/midtfyn.js"></script>
+                </canvas>
+            </div>
+
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 100px;"
+                id="monsson2Pie">
+                <canvas id="barChartMonsson2" height="220px" width="240px">
+                    <script src="Script/Pie/monsson2.js"></script>
+                </canvas>
+            </div>
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 110px;"
+                id="nordfynPie">
+                <canvas id="barChartNordfyn" height="220px" width="240px">
+                    <script src="Script/Pie/nordfyn.js"></script>
+                </canvas>
+            </div>
+            <div style="float: left; display: inline-block; justify-content: center; align-items: center; padding-left: 100px;"
+                id="rodekroPie">
+                <canvas id="barChartRodekro" height="220px" width="240px">
+                    <script src="Script/Pie/rodekro.js"></script>
+                </canvas>
+            </div>
+
+        </div>
+        <div style="border-bottom: 2px solid black; float: left; vertical-align: text-top; height: auto; width: 100%"
+            id="textRow">
+            <h1 id="sodePieText" style="vertical-align: top; padding-left: 220px ;display: inline-block;">n/a</h1>
+            <h1 id="midtfynPieText" style="Padding-left: 260px; display: inline-block;">n/a</h1>
+            <h1 id="monsson2PieText" style="padding-left: 270px; display: inline-block;">n/a</h1>
+            <h1 id="nordfynPieText" style="padding-left: 260px; display: inline-block;">n/a</h1>
+            <h1 id="rodekroPieText" style="height: auto; padding-left: 270px; display: inline-block;">n/a</h1>
+        </div>
+
+
+
+        <div style=" border-bottom: 2px solid black; float: left; vertical-align: text-top; height: auto; background-color: aqua; width: 100%"
+            id="textRow">
+        </div>
+    </div>
+
+    <script src="Script/ApiScript/Data/DataCalculator.js"></script>
+    <script>
+
+
+        //Auto scroll down (looks bad tho)
+        /*
+        setInterval(() => {
+        window.scrollBy(0, 2);
+        }, 25);
+        */
+
+        //Automaticly changes to next html page
+
+       setTimeout(function () { window.location = 'operation2.html'; }, 20000);
+
+    </script>
+
+</body>
+
+</html>
