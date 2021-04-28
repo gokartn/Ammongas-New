@@ -21,7 +21,8 @@ function getAvedorePieValue() {
     try {
         let avedoreRunningHour = localStorage.getItem('avedoreRunningPie')
         let avedoreGasHour = localStorage.getItem('avedoreGasPie')
-        if (avedoreRunningHour != 0 || avedoreRunningHour > 0) {
+        console.log("avedore Gas hour  =  " + avedoreGasHour)
+        if (avedoreRunningHour != 0 || avedoreRunningHour > 0 || avedoreGasHour != null || avedoreGasHour != undefined) {
             let difference = avedoreRunningHour - avedoreGasHour;
             avedorePieValue = ((difference / avedoreRunningHour) * 100);
             removeall(avedoreBarChart);

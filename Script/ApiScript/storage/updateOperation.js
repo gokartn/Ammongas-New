@@ -40,11 +40,11 @@ function updateRequests() {
         if(facility.prodToday != null) {
             callRawToday(facility.prodToday, facility.name);
         }
-        /*
+        
         if(facility.oeeUrl != null){
-            
+            callOEERequest(facility.oeeUrl, facility.name);
         }
-        */
+        
         
     });
 

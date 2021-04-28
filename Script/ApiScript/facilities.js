@@ -104,7 +104,7 @@ var facilities = [
     prodTotal: 'https://system.aldaq.com/api/data/logger/155/point/17353',
     prodYesterday: 'https://system.aldaq.com/api/data/logger/155/point/17354',
     prodToday: 'https://system.aldaq.com/api/data/logger/155/point/17355',
-    oeeUrl: 'https://system.aldaq.com/api/data/logger/147/point/15750'},
+    oeeUrl: 'https://system.aldaq.com/api/data/logger/155/point/17348'},
 
     {name: 'stormosen', 
     gasUrl: 'https://system.aldaq.com/api/data/logger/151/point/16517', 

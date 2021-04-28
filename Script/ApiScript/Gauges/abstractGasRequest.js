@@ -186,3 +186,49 @@ function callRawToday(url, name) {
     };
     xhr.send()
 }
+
+function callOEERequest(url, name) {
+    var createCORSRequest = function (method, url) {
+        var xhr = new XMLHttpRequest();
+        if ("withCredentials" in xhr) {
+            // Most browsers.
+            xhr.open(method, url, true);
+        } else if (typeof XDomainRequest != "undefined") {
+            // IE8 & IE9
+            xhr = new XDomainRequest();
+            xhr.open(method, url);
+        } else {
+            // CORS not supported.
+            xhr = null;
+        }
+        return xhr;
+    };
+
+
+    var method = 'GET';
+    var xhr = createCORSRequest(method, url);
+    xhr.setRequestHeader("Authorization", "Basic " + btoa(auth.username + ":" + auth.password));
+    xhr.onload = function () {
+        var OEEJSON = JSON.parse(this.response)
+        try {
+            let OEEData = OEEJSON[0];
+            if (OEEData.last_value == null || OEEData.last_value <= 0) {
+                let oEEHour = 0;
+                console.log(name + "OEEHour is 0 or null");
+                localStorage.setItem(name + 'OEEValue', oEEHour)
+            } else {
+                let oEEHour = OEEData.last_value;
+                localStorage.setItem(name +'OEEValue', oEEHour)
+            }
+
+
+        } catch (Error) {
+            console.log(Error);
+        }
+    };
+
+    xhr.onerror = function () {
+        // Error code goes here.
+    };
+    xhr.send()
+}
