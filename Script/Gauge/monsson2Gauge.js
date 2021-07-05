@@ -1,5 +1,5 @@
 var monson2Gauge = new RadialGauge({
-  renderTo: 'monson2Gauge', // identifier of HTML canvas element or element itself
+  renderTo: 'monsson2Gauge', // identifier of HTML canvas element or element itself
   width: 200,
   height: 200,
   units: 'm3/h',

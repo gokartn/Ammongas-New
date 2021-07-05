@@ -1,5 +1,6 @@
 shouldUpdate();
 
+
 function shouldUpdate() {
     let lastupdate = localStorage.getItem("operationDate");
     if (lastupdate === null) {
@@ -18,8 +19,6 @@ function shouldUpdate() {
         console.log("I Didnt update. cause last update was: " + localStorage.getItem("operationDate") + " And current time is: " + Date.now().toString());
     }
 }
-
-
 
 
 function updateRequests() {
@@ -44,16 +43,11 @@ function updateRequests() {
         if(facility.oeeUrl != null){
             callOEERequest(facility.oeeUrl, facility.name);
         }
-        
-        
     });
-
         localStorage.setItem('operationDate', Date.now().toString());
     }, 2000);
 
 }
-
-
 
 function deleteAllData() {
     localStorage.clear();

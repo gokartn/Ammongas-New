@@ -1,5 +1,5 @@
 
-var canvas = document.getElementById("barChartAvedore");
+var canvas = document.getElementById("barChartavedore");
 var ctx = canvas.getContext('2d');
 
 // Global Options:
